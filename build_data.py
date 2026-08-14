@@ -10,10 +10,12 @@ Genera (o sobrescribe) data.json en la misma carpeta que este script.
 import sys
 import json
 import re
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 import pandas as pd
+
+AR_TZ = timezone(timedelta(hours=-3))  # Argentina (UTC-3, sin horario de verano)
 
 SHEET_NAME = "Acumulado"
 
@@ -67,7 +69,7 @@ def build(input_path: Path, output_path: Path):
     meses = sorted({c["mes"] for c in casos if c["mes"]})
 
     data = {
-        "generadoEl": datetime.now().strftime("%Y-%m-%d %H:%M"),
+        "generadoEl": datetime.now(AR_TZ).strftime("%Y-%m-%d %H:%M"),
         "meses": meses,
         "casos": casos,
     }

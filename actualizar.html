@@ -128,7 +128,7 @@ function procesar(archivo) {
       const meses = [...new Set(casos.map(c => c.mes))].sort();
 
       const data = {
-        generadoEl: new Date().toLocaleString('es-AR'),
+        generadoEl: new Date().toLocaleString('es-AR', { timeZone: 'America/Argentina/Buenos_Aires' }),
         meses,
         casos,
       };
