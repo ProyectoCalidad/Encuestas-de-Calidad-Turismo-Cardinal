@@ -1,0 +1,289 @@
+{
+"generadoEl": "2026-08-14 19:22",
+"meses": [
+"2026-06",
+"2026-07"
+],
+"casos": [
+{
+"mes": "2026-07",
+"campana": "JOVEN BASICO",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-07",
+"campana": "ECONOMY 25",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-07",
+"campana": "EUROPA Y EL MUNDO",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-07",
+"campana": "CARDINAL MULTIVIAJES 150 - 30 DIAS",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-07",
+"campana": "CARDINAL 100",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-07",
+"campana": "INTERNACIONAL 100",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-07",
+"campana": "EUROPA Y EL MUNDO",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-07",
+"campana": "INTERNACIONAL 50",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-07",
+"campana": "EUROPA Y EL MUNDO BASIC ECONOMY",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-07",
+"campana": "Economy 15",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-07",
+"campana": "EUROPA Y EL MUNDO",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-07",
+"campana": "CARDINAL MULTIVIAJES 50 - 30 DIAS",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-07",
+"campana": "CARDINAL 100",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-07",
+"campana": "CARDINAL 50",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-07",
+"campana": "EUROPA Y EL MUNDO",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-07",
+"campana": "CARDINAL 150",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-07",
+"campana": "CARDINAL 50",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-07",
+"campana": "CARDINAL 100",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-07",
+"campana": "EUROPA Y EL MUNDO",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-07",
+"campana": "Economy 15",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-07",
+"campana": "CARDINAL 50",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-07",
+"campana": "EUROPA Y EL MUNDO",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-07",
+"campana": "INTERNACIONAL 40",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-07",
+"campana": "INTERNACIONAL 70",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-07",
+"campana": "INTERNACIONAL 70",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-07",
+"campana": "INTERNACIONAL 40",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-07",
+"campana": "EUROPA Y EL MUNDO",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-07",
+"campana": "CARDINAL JOVEN 100",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-07",
+"campana": "Ficha Eventual",
+"atencion": 5,
+"prestador": 5,
+"recomienda": "Recomienda",
+"respondio": "Responde"
+},
+{
+"mes": "2026-07",
+"campana": "Ficha Eventual",
+"atencion": 5,
+"prestador": null,
+"recomienda": "Neutral",
+"respondio": "Parcial"
+},
+{
+"mes": "2026-07",
+"campana": "CARDINAL 100",
+"atencion": 5,
+"prestador": 5,
+"recomienda": "Recomienda",
+"respondio": "Responde"
+},
+{
+"mes": "2026-07",
+"campana": "CARDINAL 50",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-06",
+"campana": "INTERNACIONAL 70",
+"atencion": 5,
+"prestador": null,
+"recomienda": "Neutral",
+"respondio": "Parcial"
+},
+{
+"mes": "2026-06",
+"campana": "CARDINAL 200",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde"
+},
+{
+"mes": "2026-06",
+"campana": "EUROPA Y EL MUNDO ECONOMY",
+"atencion": 4,
+"prestador": 5,
+"recomienda": "Recomienda",
+"respondio": "Responde"
+}
+]
+}

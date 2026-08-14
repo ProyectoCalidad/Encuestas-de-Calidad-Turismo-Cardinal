@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cardinal Assistance · Panel de Turismo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
+<style>
+:root{
+  --azul-oscuro: #005A96;
+  --azul:        #00AEEF;
+  --celeste:     #6DCFF6;
+  --naranja:     #F7941E;
+  --magenta:     #ED145B;
+  --verde:       #00A99D;
+  --amarillo:    #FFC125;
+  --violeta:     #845DC1;
+
+  --bg:        #f2f3f6;
+  --bg-soft:   #e9ebef;
+  --card:      #ffffff;
+  --texto:     #1c1e21;
+  --texto-sec: #62666e;
+  --borde:     #e3e5ea;
+  --sombra:    0 2px 14px rgba(20,20,30,.06);
+}
+html[data-theme="dark"]{
+  --bg:        #14161a;
+  --bg-soft:   #1a1d22;
+  --card:      #1e2126;
+  --texto:     #edeff2;
+  --texto-sec: #9aa0aa;
+  --borde:     #2b2e35;
+  --sombra:    0 2px 14px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--bg); color:var(--texto);
+  font-family:'Inter', -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  transition:background .2s, color .2s;
+}
+.wrap{max-width:1400px; margin:0 auto; padding:20px 24px 60px;}
+
+/* header */
+header{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding:14px 0 20px; flex-wrap:wrap;
+}
+.marca{display:flex; align-items:center; gap:10px;}
+.marca img.logo-principal{height:52px; width:auto; background:#003a63; border-radius:10px; padding:8px 16px;}
+.marca .textos{margin-left:6px;}
+.marca h1{font-size:1.15rem; font-weight:800; margin:0; letter-spacing:.2px;}
+.marca p{margin:0; font-size:.8rem; color:var(--texto-sec);}
+.header-acciones{display:flex; align-items:center; gap:12px;}
+#actualizado{font-size:.78rem; color:var(--texto-sec);}
+#toggle-tema{
+  border:1px solid var(--borde); background:var(--card); color:var(--texto);
+  width:40px; height:40px; border-radius:10px; cursor:pointer; font-size:1.1rem;
+  display:flex; align-items:center; justify-content:center;
+}
+
+/* filtros */
+.filtros{
+  display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+  background:var(--card); border:1px solid var(--borde); border-radius:14px;
+  padding:14px 16px; box-shadow:var(--sombra); margin-bottom:20px;
+}
+.filtros .etq{font-size:.78rem; color:var(--texto-sec); font-weight:600; margin-right:2px;}
+.multiselect{position:relative;}
+.ms-boton{
+  border:1px solid var(--borde); background:var(--bg-soft); color:var(--texto);
+  padding:9px 14px; border-radius:9px; font-size:.85rem; cursor:pointer;
+  display:flex; align-items:center; gap:8px; min-width:150px; justify-content:space-between;
+}
+.ms-boton .contador{
+  background:var(--rojo); color:#fff; font-size:.68rem; font-weight:700;
+  border-radius:20px; padding:1px 7px; display:none;
+}
+.ms-boton.activo .contador{display:inline-block;}
+.ms-panel{
+  display:none; position:absolute; top:calc(100% + 6px); left:0; z-index:40;
+  background:var(--card); border:1px solid var(--borde); border-radius:10px;
+  box-shadow:var(--sombra); padding:8px; min-width:230px; max-height:280px; overflow:auto;
+}
+.ms-panel.abierto{display:block;}
+.ms-panel label{
+  display:flex; align-items:center; gap:8px; font-size:.83rem; padding:6px 8px;
+  border-radius:6px; cursor:pointer;
+}
+.ms-panel label:hover{background:var(--bg-soft);}
+.ms-panel .ms-limpiar{
+  font-size:.75rem; color:var(--rojo); cursor:pointer; text-align:right; padding:4px 8px;
+}
+#limpiar-filtros{
+  margin-left:auto; border:none; background:transparent; color:var(--rojo);
+  font-size:.82rem; font-weight:600; cursor:pointer;
+}
+
+/* tarjetas de resumen (más chicas que las de Satisfacción) */
+.resumen{
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(120px, 1fr)); gap:12px; margin-bottom:20px;
+}
+.resumen-card{
+  background:var(--card); border:1px solid var(--borde); border-radius:12px;
+  padding:12px 14px; box-shadow:var(--sombra); text-align:center;
+}
+.resumen-card .valor{font-size:1.25rem; font-weight:800; color:var(--acento);}
+.resumen-card .etq{font-size:.68rem; color:var(--texto-sec); font-weight:600; margin-top:2px; text-transform:uppercase; letter-spacing:.3px;}
+
+/* tarjetas de promedio (anillo + barras) */
+.promedios{
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:14px; margin-bottom:20px;
+}
+.prom-card{
+  background:var(--card); border:1px solid var(--borde); border-radius:16px;
+  padding:18px 20px; box-shadow:var(--sombra);
+}
+.prom-top{display:flex; align-items:center; gap:16px;}
+.prom-anillo{
+  width:64px; height:64px; border-radius:50%; flex-shrink:0; position:relative;
+  background:conic-gradient(var(--acento) calc(var(--pct)*1%), var(--bg-soft) 0);
+  display:flex; align-items:center; justify-content:center;
+}
+.prom-anillo::before{
+  content:""; position:absolute; inset:7px; background:var(--card); border-radius:50%;
+}
+.prom-anillo span{position:relative; font-size:.82rem; font-weight:800;}
+.prom-titulo{font-size:.8rem; color:var(--texto-sec); font-weight:600;}
+.prom-valor{font-size:1.5rem; font-weight:800; margin-top:2px;}
+.prom-valor small{font-size:.82rem; font-weight:600; color:var(--texto-sec);}
+.prom-aprox{font-size:.74rem; color:var(--texto-sec); margin-top:1px;}
+.prom-barras{margin-top:14px; display:flex; flex-direction:column; gap:7px;}
+.prom-fila{display:grid; grid-template-columns:112px 1fr 36px; align-items:center; gap:8px; font-size:.75rem;}
+.prom-fila .etq{color:var(--texto-sec); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.prom-track{background:var(--bg-soft); border-radius:6px; height:7px; overflow:hidden;}
+.prom-fill{height:100%; border-radius:6px;}
+.prom-fila .val{text-align:right; color:var(--texto-sec); font-weight:700;}
+
+/* charts grid */
+.grid{
+  display:grid; grid-template-columns:repeat(2, 1fr); gap:16px;
+}
+.grid .full{grid-column:1 / -1;}
+.tarjeta{
+  background:var(--card); border:1px solid var(--borde); border-radius:16px;
+  padding:16px 18px 12px; box-shadow:var(--sombra);
+}
+.tarjeta h3{margin:0 0 10px; font-size:.95rem; font-weight:700;}
+.tarjeta .chart-box{position:relative; height:280px;}
+.tarjeta .chart-box.alto{height:340px;}
+
+footer{text-align:center; color:var(--texto-sec); font-size:.75rem; padding:26px 0 0;}
+
+@media (max-width: 1100px){
+  .grid{grid-template-columns:1fr;}
+}
+@media (max-width: 640px){
+  .kpis{grid-template-columns:repeat(2, 1fr);}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="marca">
+      <img class="logo-principal" src="assets/logo-cardinal.png" alt="Cardinal Assistance">
+      <div class="textos">
+        <h1>Panel de Resultados de Encuesta — Turismo</h1>
+        <p>Encuestas a clientes sobre servicios de asistencia en viajes · Cardinal Assistance</p>
+      </div>
+    </div>
+    <div class="header-acciones">
+      <span id="actualizado"></span>
+      <button id="toggle-tema" title="Cambiar tema">🌙</button>
+    </div>
+  </header>
+
+  <div class="filtros" id="filtros"></div>
+
+  <div class="resumen" id="resumen"></div>
+
+  <div class="promedios" id="promedios"></div>
+
+  <div class="grid">
+    <div class="tarjeta"><h3>NPS</h3><div class="chart-box"><canvas id="c-nps"></canvas></div></div>
+    <div class="tarjeta"><h3>Evolución de NPS mensual</h3><div class="chart-box"><canvas id="c-nps-evol"></canvas></div></div>
+
+    <div class="tarjeta"><h3>Nivel de Respuesta</h3><div class="chart-box"><canvas id="c-respuesta"></canvas></div></div>
+    <div class="tarjeta"><h3>Ranking por Campaña</h3><div class="chart-box alto"><canvas id="c-campana"></canvas></div></div>
+  </div>
+
+  <footer>Panel de Turismo · Cardinal Assistance · datos actualizados manualmente mes a mes</footer>
+</div>
+
+<script>
+Chart.register(ChartDataLabels);
+Chart.defaults.font.family = "'Inter', sans-serif";
+
+const PALETA = ['#005A96','#00AEEF','#F7941E','#ED145B','#00A99D','#845DC1','#FFC125','#6DCFF6'];
+
+/* ---------- tema ---------- */
+const html = document.documentElement;
+const btnTema = document.getElementById('toggle-tema');
+function aplicarTema(t){
+  html.setAttribute('data-theme', t);
+  btnTema.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('turismo-tema', t);
+}
+aplicarTema(localStorage.getItem('turismo-tema') || 'dark');
+btnTema.addEventListener('click', () => {
+  aplicarTema(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  Object.values(graficos).forEach(g => g && g.update());
+});
+
+/* ---------- estado ---------- */
+let CASOS = [];
+let MESES = [];
+const filtros = { mes: [], campana: [] };
+const graficos = {};
+
+const ETIQUETA = { mes:'Mes', campana:'Campaña' };
+
+function nombreMes(ym){
+  if(!ym) return '';
+  const [y,m] = ym.split('-');
+  const nombres = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  return `${nombres[parseInt(m,10)-1]} ${y}`;
+}
+
+/* ---------- carga de datos ---------- */
+fetch('data.json?_=' + Date.now())
+  .then(r => r.json())
+  .then(data => {
+    CASOS = data.casos;
+    MESES = data.meses.slice().sort();
+    document.getElementById('actualizado').textContent = data.generadoEl ? `Actualizado: ${data.generadoEl}` : '';
+    construirFiltros();
+    renderTodo();
+  })
+  .catch(err => {
+    document.getElementById('resumen').innerHTML =
+      `<div style="grid-column:1/-1;color:#c0392b;padding:20px;">No se pudo cargar data.json. Verificá que el archivo esté en la misma carpeta que index.html.</div>`;
+    console.error(err);
+  });
+
+/* ---------- filtros (segmentadores) ---------- */
+function valoresUnicos(campo){
+  const set = new Set();
+  CASOS.forEach(c => { if(c[campo]) set.add(c[campo]); });
+  return [...set].sort((a,b)=>a.localeCompare(b,'es'));
+}
+
+function construirFiltros(){
+  const cont = document.getElementById('filtros');
+  cont.innerHTML = '';
+
+  const camposFiltro = [
+    {clave:'mes', valores: MESES.slice().sort().reverse(), etiquetaFn: nombreMes},
+    {clave:'campana', valores: valoresUnicos('campana')},
+  ];
+
+  camposFiltro.forEach(({clave, valores, etiquetaFn}) => {
+    const ms = document.createElement('div');
+    ms.className = 'multiselect';
+    const boton = document.createElement('button');
+    boton.className = 'ms-boton';
+    boton.type = 'button';
+    boton.innerHTML = `<span>${ETIQUETA[clave]}</span><span class="contador">0</span>`;
+    const panel = document.createElement('div');
+    panel.className = 'ms-panel';
+
+    const limpiar = document.createElement('div');
+    limpiar.className = 'ms-limpiar';
+    limpiar.textContent = 'Limpiar';
+    limpiar.addEventListener('click', () => {
+      filtros[clave] = [];
+      panel.querySelectorAll('input').forEach(i => i.checked = false);
+      actualizarBoton(clave, boton);
+      renderTodo();
+    });
+    panel.appendChild(limpiar);
+
+    valores.forEach(v => {
+      const label = document.createElement('label');
+      const chk = document.createElement('input');
+      chk.type = 'checkbox';
+      chk.value = v;
+      chk.addEventListener('change', () => {
+        if(chk.checked) filtros[clave].push(v);
+        else filtros[clave] = filtros[clave].filter(x => x !== v);
+        actualizarBoton(clave, boton);
+        renderTodo();
+      });
+      label.appendChild(chk);
+      label.append(document.createTextNode(etiquetaFn ? etiquetaFn(v) : v));
+      panel.appendChild(label);
+    });
+
+    boton.addEventListener('click', (e) => {
+      e.stopPropagation();
+      document.querySelectorAll('.ms-panel.abierto').forEach(p => { if(p!==panel) p.classList.remove('abierto'); });
+      panel.classList.toggle('abierto');
+    });
+
+    ms.appendChild(boton);
+    ms.appendChild(panel);
+    cont.appendChild(ms);
+  });
+
+  const btnLimpiarTodo = document.createElement('button');
+  btnLimpiarTodo.id = 'limpiar-filtros';
+  btnLimpiarTodo.textContent = 'Limpiar todos los filtros';
+  btnLimpiarTodo.addEventListener('click', () => {
+    Object.keys(filtros).forEach(k => filtros[k] = []);
+    cont.querySelectorAll('input[type=checkbox]').forEach(i => i.checked = false);
+    cont.querySelectorAll('.ms-boton').forEach(b => { b.classList.remove('activo'); b.querySelector('.contador').textContent = '0'; });
+    renderTodo();
+  });
+  cont.appendChild(btnLimpiarTodo);
+
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.ms-panel.abierto').forEach(p => p.classList.remove('abierto'));
+  });
+}
+
+function actualizarBoton(clave, boton){
+  const n = filtros[clave].length;
+  boton.querySelector('.contador').textContent = n;
+  boton.classList.toggle('activo', n > 0);
+}
+
+function casosFiltrados(ignorarMes = false){
+  return CASOS.filter(c => {
+    if(!ignorarMes && filtros.mes.length && !filtros.mes.includes(c.mes)) return false;
+    if(filtros.campana.length && !filtros.campana.includes(c.campana)) return false;
+    return true;
+  });
+}
+
+/* ---------- helpers de cálculo ---------- */
+function contarPorClave(arr, campo){
+  const m = {};
+  arr.forEach(c => { const v = c[campo]; if(v){ m[v] = (m[v]||0) + 1; } });
+  return m;
+}
+function topN(mapa, n){
+  const entradas = Object.entries(mapa).sort((a,b)=>b[1]-a[1]);
+  const primeros = entradas.slice(0, n);
+  const resto = entradas.slice(n).reduce((s,[,v])=>s+v, 0);
+  if(resto > 0) primeros.push(['Otros', resto]);
+  return primeros;
+}
+function promedio(arr, campo){
+  const vals = arr.map(c=>c[campo]).filter(v => v !== null && v !== undefined);
+  if(!vals.length) return null;
+  return vals.reduce((a,b)=>a+b,0) / vals.length;
+}
+function distribucion1a5(arr, campo){
+  const conteo = {1:0,2:0,3:0,4:0,5:0};
+  let total = 0;
+  arr.forEach(c => { const v = c[campo]; if(v){ conteo[v]++; total++; } });
+  return {conteo, total};
+}
+
+/* ---------- render principal ---------- */
+function renderTodo(){
+  const filtrados = casosFiltrados();
+  renderResumen(filtrados);
+  renderPromedios(filtrados);
+  renderNps(filtrados);
+  renderNpsEvolucion();
+  renderRespuesta(filtrados);
+  renderRanking('c-campana', filtrados, 'campana', 10);
+}
+
+function renderResumen(filtrados){
+  const total = filtrados.length;
+  const conEncuesta = filtrados.filter(c => c.respondio === 'Responde' || c.respondio === 'Parcial').length;
+  const clasificados = filtrados.filter(c => c.recomienda);
+  const promotores = clasificados.filter(c => c.recomienda === 'Recomienda').length;
+  const detractores = clasificados.filter(c => c.recomienda === 'No Recomienda').length;
+  const nps = clasificados.length ? Math.round((promotores - detractores) / clasificados.length * 100) : null;
+  const pctRecomienda = clasificados.length ? Math.round(promotores / clasificados.length * 100) : null;
+
+  const tarjetas = [
+    {valor: total.toLocaleString('es-AR'), etiqueta:'Casos', color:'var(--azul-oscuro)'},
+    {valor: conEncuesta.toLocaleString('es-AR'), etiqueta:'Con encuesta', color:'var(--naranja)'},
+    {valor: nps === null ? '—' : nps, etiqueta:'NPS', color:'var(--violeta)'},
+    {valor: pctRecomienda === null ? '—' : pctRecomienda + '%', etiqueta:'Recomienda', color:'var(--magenta)'},
+  ];
+
+  document.getElementById('resumen').innerHTML = tarjetas.map(t => `
+    <div class="resumen-card" style="--acento:${t.color}">
+      <div class="valor">${t.valor}</div>
+      <div class="etq">${t.etiqueta}</div>
+    </div>
+  `).join('');
+}
+
+function renderPromedios(filtrados){
+  const campos = [
+    {campo:'atencion', titulo:'Satisfacción de Atención', color:'var(--azul)'},
+    {campo:'prestador', titulo:'Satisfacción del Prestador', color:'var(--verde)'},
+  ];
+
+  document.getElementById('promedios').innerHTML = campos.map(({campo, titulo, color}) => {
+    const {conteo, total} = distribucion1a5(filtrados, campo);
+    const prom = promedio(filtrados, campo);
+    const pct = prom === null ? 0 : Math.round(prom / 5 * 100);
+
+    const filas = [1,2,3,4,5]
+      .map(n => ({ n, pct: total ? Math.round(conteo[n] / total * 100) : 0 }))
+      .sort((a, b) => b.pct - a.pct)
+      .map(f => `
+        <div class="prom-fila">
+          <span class="etq">${ETIQUETA_SATISFACCION[f.n]}</span>
+          <div class="prom-track"><div class="prom-fill" style="width:${f.pct}%; background:${color}"></div></div>
+          <span class="val">${f.pct}%</span>
+        </div>`).join('');
+
+    return `
+      <div class="prom-card" style="--acento:${color}">
+        <div class="prom-top">
+          <div class="prom-anillo" style="--pct:${pct}"><span>${pct}%</span></div>
+          <div>
+            <div class="prom-titulo">${titulo}</div>
+            <div class="prom-valor">${prom === null ? '—' : prom.toFixed(1)}<small>/5</small></div>
+            <div class="prom-aprox">${prom === null ? 'Sin datos' : '≈ ' + pct + '%'}</div>
+          </div>
+        </div>
+        <div class="prom-barras">${filas}</div>
+      </div>`;
+  }).join('');
+}
+
+function crear(id, config){
+  if(graficos[id]) graficos[id].destroy();
+  graficos[id] = new Chart(document.getElementById(id), config);
+}
+
+function colorTexto(){ return getComputedStyle(html).getPropertyValue('data-theme') === 'dark' ? '#fff' : '#1c1e21'; }
+function esOscuro(){ return html.getAttribute('data-theme') === 'dark'; }
+function colorEjes(){ return esOscuro() ? '#9aa0aa' : '#62666e'; }
+function colorGrilla(){ return esOscuro() ? 'rgba(255,255,255,.06)' : 'rgba(0,0,0,.06)'; }
+
+function renderNps(filtrados){
+  const clasificados = filtrados.filter(c => c.recomienda);
+  const promotores = clasificados.filter(c => c.recomienda === 'Recomienda').length;
+  const neutrales = clasificados.filter(c => c.recomienda === 'Neutral').length;
+  const detractores = clasificados.filter(c => c.recomienda === 'No Recomienda').length;
+  const total = clasificados.length || 1;
+
+  crear('c-nps', {
+    type:'doughnut',
+    data:{
+      labels:['Promotores','Neutrales','Detractores'],
+      datasets:[{data:[promotores,neutrales,detractores], backgroundColor:['#1C9A5D','#E7A72A','#E20000'], borderWidth:0}]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{position:'bottom', labels:{color:colorEjes()}},
+        datalabels:{
+          color:'#fff', font:{weight:'700', size:12},
+          formatter:(v)=> total ? Math.round(v/total*100)+'%' : '0%'
+        },
+        tooltip:{callbacks:{label:(ctx)=> `${ctx.label}: ${ctx.raw} (${Math.round(ctx.raw/total*100)}%)`}}
+      }
+    }
+  });
+}
+
+function renderNpsEvolucion(){
+  const base = casosFiltrados(true); // respeta provincia/vehículo/servicio, ignora filtro de mes
+  const porMes = MESES.slice().sort().map(m => {
+    const del = base.filter(c => c.mes === m && c.recomienda);
+    const prom = del.filter(c => c.recomienda === 'Recomienda').length;
+    const det = del.filter(c => c.recomienda === 'No Recomienda').length;
+    return del.length ? Math.round((prom-det)/del.length*100) : null;
+  });
+
+  crear('c-nps-evol', {
+    type:'line',
+    data:{
+      labels: MESES.slice().sort().map(nombreMes),
+      datasets:[{
+        label:'NPS', data:porMes, borderColor:'#3D3678', backgroundColor:'#3D3678',
+        tension:.3, pointRadius:5, pointBackgroundColor:'#3D3678', fill:false
+      }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        datalabels:{
+          align:'top', color: esOscuro() ? '#edeff2':'#1c1e21', font:{weight:'700'},
+          formatter:(v)=> v===null?'':v
+        }
+      },
+      scales:{
+        y:{beginAtZero:true, min:0, max:100, ticks:{color:colorEjes(), callback:v=>v+''}, grid:{color:colorGrilla()}},
+        x:{ticks:{color:colorEjes()}, grid:{display:false}}
+      }
+    }
+  });
+}
+
+function renderRespuesta(filtrados){
+  const conteo = {'Responde':0,'Parcial':0,'No Responde':0};
+  filtrados.forEach(c => { if(c.respondio && conteo[c.respondio] !== undefined) conteo[c.respondio]++; });
+  const total = filtrados.length || 1;
+
+  crear('c-respuesta', {
+    type:'pie',
+    data:{
+      labels:Object.keys(conteo),
+      datasets:[{data:Object.values(conteo), backgroundColor:['#1C9A5D','#E7A72A','#9aa0aa'], borderWidth:0}]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{position:'bottom', labels:{color:colorEjes()}},
+        datalabels:{color:'#fff', font:{weight:'700'}, formatter:(v)=>Math.round(v/total*100)+'%'}
+      }
+    }
+  });
+}
+
+const ETIQUETA_SATISFACCION = {1:'Muy malo', 2:'Malo', 3:'Regular', 4:'Bueno', 5:'Excelente'};
+
+function renderRanking(id, filtrados, campo, n){
+  const mapa = contarPorClave(filtrados, campo);
+  const entradas = topN(mapa, n);
+  const total = filtrados.filter(c=>c[campo]).length || 1;
+  const data = entradas.map(([,v]) => Math.round(v/total*100));
+
+  crear(id, {
+    type:'bar',
+    data:{
+      labels: entradas.map(([k])=>k),
+      datasets:[{ data, backgroundColor: PALETA, borderRadius:6 }]
+    },
+    options:{
+      indexAxis:'y',
+      responsive:true, maintainAspectRatio:false,
+      layout:{padding:{right:38}},
+      plugins:{
+        legend:{display:false},
+        datalabels:{anchor:'end', align:'end', clamp:true, clip:false, color: esOscuro()?'#edeff2':'#1c1e21', font:{weight:'700', size:11}, formatter:v=>v+'%'}
+      },
+      scales:{
+        x:{beginAtZero:true, max:100, ticks:{color:colorEjes(), callback:v=>v+'%'}, grid:{color:colorGrilla()}},
+        y:{ticks:{color:colorEjes(), font:{size:11}}, grid:{display:false}}
+      }
+    }
+  });
+}
+</script>
+</body>
+</html>

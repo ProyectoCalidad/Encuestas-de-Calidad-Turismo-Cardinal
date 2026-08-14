@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Actualizar panel de Turismo</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+  :root{
+    --azul:#005A96; --fondo:#f4f5f7; --texto:#222; --card:#fff; --borde:#e2e4e8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background:var(--fondo); color:var(--texto); margin:0; padding:40px 20px;
+    display:flex; justify-content:center;
+  }
+  .card{
+    background:var(--card); border:1px solid var(--borde); border-radius:14px;
+    padding:36px; max-width:640px; width:100%; box-shadow:0 4px 20px rgba(0,0,0,.06);
+  }
+  h1{font-size:1.4rem; margin:0 0 6px;}
+  p{color:#555; line-height:1.5;}
+  .drop{
+    border:2px dashed var(--azul); border-radius:12px; padding:36px 20px; text-align:center;
+    margin:24px 0; cursor:pointer; transition:.15s;
+  }
+  .drop.hover{background:#eaf4fb;}
+  .drop input{display:none;}
+  button{
+    background:var(--azul); color:#fff; border:none; padding:12px 22px; border-radius:8px;
+    font-size:1rem; cursor:pointer; width:100%;
+  }
+  button:disabled{background:#c9c9c9; cursor:not-allowed;}
+  #estado{margin-top:16px; font-size:.95rem; white-space:pre-line;}
+  .ok{color:#00A99D; font-weight:600;}
+  .err{color:#c0392b; font-weight:600;}
+  a.descarga{
+    display:inline-block; margin-top:14px; background:#00A99D; color:#fff;
+    padding:12px 22px; border-radius:8px; text-decoration:none; font-weight:600;
+  }
+  code{background:#eee; padding:2px 6px; border-radius:4px;}
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Actualizar panel de Turismo</h1>
+  <p>Subí acá el Excel de la BBDD mensual (hoja <code>Acumulado</code>). Esta página arma el archivo
+     <code>data.json</code> que necesita el panel — todo pasa en tu navegador, no se sube nada a ningún servidor.</p>
+
+  <div class="drop" id="drop">
+    <p style="margin:0 0 8px;"><strong>Arrastrá el Excel acá</strong> o hacé clic para elegirlo</p>
+    <input type="file" id="file" accept=".xlsx,.xls">
+  </div>
+
+  <div id="estado"></div>
+</div>
+
+<script>
+const drop = document.getElementById('drop');
+const input = document.getElementById('file');
+const estado = document.getElementById('estado');
+
+const RESPONDIO_MAP = {'RESPONDIÓ':'Responde', 'PARCIAL':'Parcial', 'NO RESPONDIÓ':'No Responde'};
+const RECOMIENDA_MAP = {'RECOMIENDA':'Recomienda', 'NEUTRAL':'Neutral', 'NO RECOMIENDA':'No Recomienda'};
+
+drop.addEventListener('click', () => input.click());
+drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('hover'); });
+drop.addEventListener('dragleave', () => drop.classList.remove('hover'));
+drop.addEventListener('drop', e => {
+  e.preventDefault();
+  drop.classList.remove('hover');
+  if (e.dataTransfer.files.length) procesar(e.dataTransfer.files[0]);
+});
+input.addEventListener('change', () => { if (input.files.length) procesar(input.files[0]); });
+
+function aPuntaje(v) {
+  if (v === null || v === undefined || v === '') return null;
+  const n = parseInt(v, 10);
+  return (n >= 1 && n <= 5) ? n : null;
+}
+
+function aMes(valorFecha) {
+  let d;
+  if (valorFecha instanceof Date) d = valorFecha;
+  else if (typeof valorFecha === 'number') d = XLSX.SSF.parse_date_code(valorFecha);
+  if (!d) return null;
+  const y = d.y ?? d.getFullYear();
+  const m = (d.m ?? (d.getMonth() + 1));
+  return `${y}-${String(m).padStart(2, '0')}`;
+}
+
+function limpio(v) {
+  if (v === null || v === undefined) return null;
+  const s = String(v).trim();
+  return s === '' ? null : s;
+}
+
+function buscarColumna(fila, palabraClave) {
+  const key = Object.keys(fila).find(k => k.includes(palabraClave));
+  return key ? fila[key] : null;
+}
+
+function procesar(archivo) {
+  estado.innerHTML = 'Procesando…';
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const wb = XLSX.read(e.target.result, { type: 'array', cellDates: true });
+      const nombreHoja = wb.SheetNames.includes('Acumulado') ? 'Acumulado' : wb.SheetNames[0];
+      const hoja = wb.Sheets[nombreHoja];
+      const filas = XLSX.utils.sheet_to_json(hoja, { defval: null, raw: true });
+
+      const casos = filas.map(f => {
+        const mesRaw = f['Mes'] ?? f['Mes '];
+        const respondioRaw = limpio(f['RESPONDIO?']);
+        const recomiendaRaw = limpio(f['Recomienda Ok']);
+        return {
+          mes: mesRaw instanceof Date ? `${mesRaw.getFullYear()}-${String(mesRaw.getMonth()+1).padStart(2,'0')}` : aMes(mesRaw),
+          campana: limpio(f['Campaña']),
+          atencion: aPuntaje(buscarColumna(f, 'calificaras_la_atencin')),
+          prestador: aPuntaje(buscarColumna(f, 'evaluaras_la_calidad_del_servicio')),
+          recomienda: recomiendaRaw ? (RECOMIENDA_MAP[recomiendaRaw] || recomiendaRaw) : null,
+          respondio: respondioRaw ? (RESPONDIO_MAP[respondioRaw] || respondioRaw) : null,
+        };
+      }).filter(c => c.mes);
+
+      const meses = [...new Set(casos.map(c => c.mes))].sort();
+
+      const data = {
+        generadoEl: new Date().toLocaleString('es-AR'),
+        meses,
+        casos,
+      };
+
+      const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+
+      estado.innerHTML =
+        `<span class="ok">Listo ✔</span><br>${casos.length} casos procesados · meses: ${meses.join(', ')}<br>` +
+        `<a class="descarga" href="${url}" download="data.json">Descargar data.json</a>` +
+        `<p style="margin-top:14px;">Reemplazá el archivo <code>data.json</code> del repositorio por este y subilo a GitHub (Add file → Upload files → Commit).</p>`;
+    } catch (err) {
+      estado.innerHTML = `<span class="err">Hubo un error procesando el archivo.</span><br>${err.message}`;
+    }
+  };
+  reader.readAsArrayBuffer(archivo);
+}
+</script>
+</body>
+</html>
