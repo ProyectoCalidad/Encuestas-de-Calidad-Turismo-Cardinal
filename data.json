@@ -1,25 +1,20 @@
 {
-"generadoEl": "2026-08-14 17:33",
+"generadoEl": "2026-09-01 15:11",
 "meses": [
 "2026-06",
-"2026-07"
+"2026-07",
+"2026-08"
 ],
 "casos": [
-{
-"mes": "2026-07",
-"campana": "JOVEN BASICO",
-"atencion": null,
-"prestador": null,
-"recomienda": null,
-"respondio": "No Responde"
-},
 {
 "mes": "2026-07",
 "campana": "ECONOMY 25",
 "atencion": null,
 "prestador": null,
 "recomienda": null,
-"respondio": "No Responde"
+"respondio": "No Responde",
+"servicio": null,
+"prestadorNombre": null
 },
 {
 "mes": "2026-07",
@@ -27,7 +22,9 @@
 "atencion": null,
 "prestador": null,
 "recomienda": null,
-"respondio": "No Responde"
+"respondio": "No Responde",
+"servicio": "SEGUNDA OPINION MEDICA",
+"prestadorNombre": "MERIDAN CARE ( AUDITORIAS )"
 },
 {
 "mes": "2026-07",
@@ -35,7 +32,9 @@
 "atencion": null,
 "prestador": null,
 "recomienda": null,
-"respondio": "No Responde"
+"respondio": "No Responde",
+"servicio": "Medicamentos",
+"prestadorNombre": "ATENCION POR REINTEGRO"
 },
 {
 "mes": "2026-07",
@@ -43,7 +42,9 @@
 "atencion": null,
 "prestador": null,
 "recomienda": null,
-"respondio": "No Responde"
+"respondio": "No Responde",
+"servicio": "Reembolso de gastos por vuelo demorado y/o cancelado",
+"prestadorNombre": "ASISTENCIA TECNICA -  ASESORAMIENTO- VARIOS"
 },
 {
 "mes": "2026-07",
@@ -51,7 +52,9 @@
 "atencion": null,
 "prestador": null,
 "recomienda": null,
-"respondio": "No Responde"
+"respondio": "No Responde",
+"servicio": "Asistencia Médica por enfermedad",
+"prestadorNombre": "ALFA ASSISTANCE ( EUROPA - ASIA - AFRICA )"
 },
 {
 "mes": "2026-07",
@@ -59,7 +62,9 @@
 "atencion": null,
 "prestador": null,
 "recomienda": null,
-"respondio": "No Responde"
+"respondio": "No Responde",
+"servicio": "Asistencia Médica por enfermedad",
+"prestadorNombre": "QUALITY TRAVEL -  ( ORLANDO - KISSIMMEE-MIAMI )"
 },
 {
 "mes": "2026-07",
@@ -67,7 +72,9 @@
 "atencion": null,
 "prestador": null,
 "recomienda": null,
-"respondio": "No Responde"
+"respondio": "No Responde",
+"servicio": "Medicamentos",
+"prestadorNombre": "ATENCION POR REINTEGRO"
 },
 {
 "mes": "2026-07",
@@ -75,7 +82,9 @@
 "atencion": null,
 "prestador": null,
 "recomienda": null,
-"respondio": "No Responde"
+"respondio": "No Responde",
+"servicio": "EQUIPAJE EXTRAVIADO",
+"prestadorNombre": "ASISTENCIA TECNICA -  ASESORAMIENTO- VARIOS"
 },
 {
 "mes": "2026-07",
@@ -83,7 +92,9 @@
 "atencion": null,
 "prestador": null,
 "recomienda": null,
-"respondio": "No Responde"
+"respondio": "No Responde",
+"servicio": "TELEMEDICINA",
+"prestadorNombre": "ASISTENCIA TECNICA -  ASESORAMIENTO- VARIOS"
 },
 {
 "mes": "2026-07",
@@ -91,7 +102,9 @@
 "atencion": null,
 "prestador": null,
 "recomienda": null,
-"respondio": "No Responde"
+"respondio": "No Responde",
+"servicio": "DEDUCIBLE A CARGO DEL ASEGURADO",
+"prestadorNombre": "ATENCION POR REINTEGRO"
 },
 {
 "mes": "2026-07",
@@ -99,7 +112,9 @@
 "atencion": null,
 "prestador": null,
 "recomienda": null,
-"respondio": "No Responde"
+"respondio": "No Responde",
+"servicio": "Asistencia Médica por accidente",
+"prestadorNombre": "ASISTEMED SL ( VISITAS MADRID )"
 },
 {
 "mes": "2026-07",
@@ -107,7 +122,9 @@
 "atencion": null,
 "prestador": null,
 "recomienda": null,
-"respondio": "No Responde"
+"respondio": "No Responde",
+"servicio": "GASTOS POR VUELO DEMORADO O CANCELADO",
+"prestadorNombre": "ATENCION POR REINTEGRO"
 },
 {
 "mes": "2026-07",
@@ -115,7 +132,9 @@
 "atencion": null,
 "prestador": null,
 "recomienda": null,
-"respondio": "No Responde"
+"respondio": "No Responde",
+"servicio": "Asistencia Médica por enfermedad",
+"prestadorNombre": "LATINOAMERICANA DE ASISTENCIAS ( LAAS MEDICAL CARE )"
 },
 {
 "mes": "2026-07",
@@ -123,7 +142,9 @@
 "atencion": null,
 "prestador": null,
 "recomienda": null,
-"respondio": "No Responde"
+"respondio": "No Responde",
+"servicio": "TELEMEDICINA",
+"prestadorNombre": "ALL ASSISTANCE"
 },
 {
 "mes": "2026-07",
@@ -131,7 +152,9 @@
 "atencion": null,
 "prestador": null,
 "recomienda": null,
-"respondio": "No Responde"
+"respondio": "No Responde",
+"servicio": "TELEMEDICINA",
+"prestadorNombre": "ASISTENCIA TECNICA -  ASESORAMIENTO- VARIOS"
 },
 {
 "mes": "2026-07",
@@ -139,7 +162,9 @@
 "atencion": null,
 "prestador": null,
 "recomienda": null,
-"respondio": "No Responde"
+"respondio": "No Responde",
+"servicio": "Asistencia Médica por enfermedad",
+"prestadorNombre": "ASISTEMED SL ( VISITAS MADRID )"
 },
 {
 "mes": "2026-07",
@@ -147,7 +172,9 @@
 "atencion": null,
 "prestador": null,
 "recomienda": null,
-"respondio": "No Responde"
+"respondio": "No Responde",
+"servicio": "Asistencia Médica por enfermedad",
+"prestadorNombre": "MEDICAL ASSISTANCE GROUP MAG (REP. DOMINICANA)"
 },
 {
 "mes": "2026-07",
@@ -155,7 +182,9 @@
 "atencion": null,
 "prestador": null,
 "recomienda": null,
-"respondio": "No Responde"
+"respondio": "No Responde",
+"servicio": "Viaje de regreso por fallecimiento de un familiar",
+"prestadorNombre": "ATENCION POR REINTEGRO"
 },
 {
 "mes": "2026-07",
@@ -163,7 +192,9 @@
 "atencion": null,
 "prestador": null,
 "recomienda": null,
-"respondio": "No Responde"
+"respondio": "No Responde",
+"servicio": "Reembolso de gastos por vuelo demorado y/o cancelado",
+"prestadorNombre": "ASISTENCIA TECNICA -  ASESORAMIENTO- VARIOS"
 },
 {
 "mes": "2026-07",
@@ -171,7 +202,9 @@
 "atencion": null,
 "prestador": null,
 "recomienda": null,
-"respondio": "No Responde"
+"respondio": "No Responde",
+"servicio": "Wallet Assistance",
+"prestadorNombre": "ASISTENCIA TECNICA -  ASESORAMIENTO- VARIOS"
 },
 {
 "mes": "2026-07",
@@ -179,7 +212,9 @@
 "atencion": null,
 "prestador": null,
 "recomienda": null,
-"respondio": "No Responde"
+"respondio": "No Responde",
+"servicio": "EQUIPAJE EXTRAVIADO",
+"prestadorNombre": "ASISTENCIA TECNICA -  ASESORAMIENTO- VARIOS"
 },
 {
 "mes": "2026-07",
@@ -187,7 +222,9 @@
 "atencion": null,
 "prestador": null,
 "recomienda": null,
-"respondio": "No Responde"
+"respondio": "No Responde",
+"servicio": "TELEMEDICINA",
+"prestadorNombre": null
 },
 {
 "mes": "2026-07",
@@ -195,7 +232,9 @@
 "atencion": null,
 "prestador": null,
 "recomienda": null,
-"respondio": "No Responde"
+"respondio": "No Responde",
+"servicio": "Medicamentos",
+"prestadorNombre": "ATENCION POR REINTEGRO"
 },
 {
 "mes": "2026-07",
@@ -203,7 +242,9 @@
 "atencion": null,
 "prestador": null,
 "recomienda": null,
-"respondio": "No Responde"
+"respondio": "No Responde",
+"servicio": "GASTOS POR VUELO DEMORADO O CANCELADO",
+"prestadorNombre": "ASISTENCIA TECNICA -  ASESORAMIENTO- VARIOS"
 },
 {
 "mes": "2026-07",
@@ -211,7 +252,9 @@
 "atencion": null,
 "prestador": null,
 "recomienda": null,
-"respondio": "No Responde"
+"respondio": "No Responde",
+"servicio": "Reembolso de gastos por vuelo demorado y/o cancelado",
+"prestadorNombre": "ASISTENCIA TECNICA -  ASESORAMIENTO- VARIOS"
 },
 {
 "mes": "2026-07",
@@ -219,7 +262,9 @@
 "atencion": null,
 "prestador": null,
 "recomienda": null,
-"respondio": "No Responde"
+"respondio": "No Responde",
+"servicio": "Asistencia Médica por enfermedad",
+"prestadorNombre": "LATINOAMERICANA DE ASISTENCIAS ( LAAS MEDICAL CARE )"
 },
 {
 "mes": "2026-07",
@@ -227,7 +272,19 @@
 "atencion": null,
 "prestador": null,
 "recomienda": null,
-"respondio": "No Responde"
+"respondio": "No Responde",
+"servicio": "Asistencia Médica por enfermedad",
+"prestadorNombre": "ALFA ASSISTANCE ( EUROPA - ASIA - AFRICA )"
+},
+{
+"mes": "2026-07",
+"campana": "Ficha Eventual",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde",
+"servicio": "Asistencia Médica por accidente",
+"prestadorNombre": "EGYCROSS ASSISTANCE (EUROPA - AFRICA - ASIA - MEDIO ORIENTE)"
 },
 {
 "mes": "2026-07",
@@ -235,55 +292,269 @@
 "atencion": 5,
 "prestador": 5,
 "recomienda": "Recomienda",
-"respondio": "Responde"
-},
-{
-"mes": "2026-07",
-"campana": "Ficha Eventual",
-"atencion": 5,
-"prestador": null,
-"recomienda": "Neutral",
-"respondio": "Parcial"
+"respondio": "Responde",
+"servicio": null,
+"prestadorNombre": null
 },
 {
 "mes": "2026-07",
 "campana": "CARDINAL 100",
 "atencion": 5,
-"prestador": 5,
-"recomienda": "Recomienda",
-"respondio": "Responde"
+"prestador": null,
+"recomienda": "Neutral",
+"respondio": "Parcial",
+"servicio": null,
+"prestadorNombre": null
 },
 {
 "mes": "2026-07",
 "campana": "CARDINAL 50",
-"atencion": null,
-"prestador": null,
-"recomienda": null,
-"respondio": "No Responde"
+"atencion": 5,
+"prestador": 5,
+"recomienda": "Recomienda",
+"respondio": "Responde",
+"servicio": "Asistencia Médica por enfermedad",
+"prestadorNombre": "LATINOAMERICANA DE ASISTENCIAS ( LAAS MEDICAL CARE )"
 },
 {
 "mes": "2026-06",
 "campana": "INTERNACIONAL 70",
-"atencion": 5,
+"atencion": null,
 "prestador": null,
-"recomienda": "Neutral",
-"respondio": "Parcial"
+"recomienda": null,
+"respondio": "No Responde",
+"servicio": "Gastos por demora  de equipaje",
+"prestadorNombre": "ATENCION POR REINTEGRO"
 },
 {
 "mes": "2026-06",
 "campana": "CARDINAL 200",
-"atencion": null,
+"atencion": 5,
 "prestador": null,
-"recomienda": null,
-"respondio": "No Responde"
+"recomienda": "Neutral",
+"respondio": "Parcial",
+"servicio": "TELEMEDICINA",
+"prestadorNombre": "LATINOAMERICANA DE ASISTENCIAS ( LAAS MEDICAL CARE )"
 },
 {
 "mes": "2026-06",
 "campana": "EUROPA Y EL MUNDO ECONOMY",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde",
+"servicio": "Asistencia Médica por enfermedad",
+"prestadorNombre": "MEDICAL ASSISTANCE GROUP MAG (REP. DOMINICANA)"
+},
+{
+"mes": "2026-08",
+"campana": "INTERNACIONAL 40",
 "atencion": 4,
 "prestador": 5,
 "recomienda": "Recomienda",
-"respondio": "Responde"
+"respondio": "Responde",
+"servicio": "EQUIPAJE EXTRAVIADO",
+"prestadorNombre": null
+},
+{
+"mes": "2026-08",
+"campana": "JOVEN BASICO",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde",
+"servicio": "Asistencia Médica por enfermedad",
+"prestadorNombre": null
+},
+{
+"mes": "2026-08",
+"campana": "CARDINAL 50",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde",
+"servicio": "Asistencia Médica por enfermedad",
+"prestadorNombre": "ASISTENCIA TECNICA -  ASESORAMIENTO- VARIOS"
+},
+{
+"mes": "2026-08",
+"campana": "CARDINAL JOVEN 100",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde",
+"servicio": "Asistencia Médica por enfermedad",
+"prestadorNombre": "ATENCION POR REINTEGRO"
+},
+{
+"mes": "2026-08",
+"campana": "INTERNACIONAL 30",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde",
+"servicio": "TELEMEDICINA",
+"prestadorNombre": "ASISTEMED SL ( VISITAS MADRID )"
+},
+{
+"mes": "2026-08",
+"campana": "EUROPA Y EL MUNDO",
+"atencion": 5,
+"prestador": 5,
+"recomienda": null,
+"respondio": "Responde",
+"servicio": "Asistencia Médica por enfermedad",
+"prestadorNombre": "ALFA ASSISTANCE ( EUROPA - ASIA - AFRICA )"
+},
+{
+"mes": "2026-08",
+"campana": "EUROPA Y EL MUNDO",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde",
+"servicio": "Asistencia Médica por enfermedad",
+"prestadorNombre": "EGYCROSS ASSISTANCE (EUROPA - AFRICA - ASIA - MEDIO ORIENTE)"
+},
+{
+"mes": "2026-08",
+"campana": "INTERNACIONAL 30",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde",
+"servicio": "Asistencia Médica por enfermedad",
+"prestadorNombre": "ALFA ASSISTANCE ( EUROPA - ASIA - AFRICA )"
+},
+{
+"mes": "2026-08",
+"campana": "EUROPA Y EL MUNDO",
+"atencion": 4,
+"prestador": 4,
+"recomienda": "Recomienda",
+"respondio": "Responde",
+"servicio": "Garantía de Viaje de Regreso",
+"prestadorNombre": "ATENCION POR REINTEGRO"
+},
+{
+"mes": "2026-08",
+"campana": "INTERNACIONAL 25",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde",
+"servicio": "Asistencia Médica por enfermedad",
+"prestadorNombre": "SALUDONNET ESPAÑA"
+},
+{
+"mes": "2026-08",
+"campana": "CARDINAL 100",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde",
+"servicio": "Asistencia Médica por enfermedad",
+"prestadorNombre": "DOCTORS NOW HOUSE CALL AND CLINIC"
+},
+{
+"mes": "2026-08",
+"campana": "CARDINAL 50",
+"atencion": 5,
+"prestador": 5,
+"recomienda": "Recomienda",
+"respondio": "Responde",
+"servicio": "Asistencia Médica por enfermedad",
+"prestadorNombre": "ASISTEMED SL ( VISITAS MADRID )"
+},
+{
+"mes": "2026-08",
+"campana": "EUROPA Y EL MUNDO",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde",
+"servicio": "Asistencia Médica por enfermedad",
+"prestadorNombre": null
+},
+{
+"mes": "2026-08",
+"campana": "INTERNACIONAL 15",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde",
+"servicio": "TELEMEDICINA",
+"prestadorNombre": "ALFA ASSISTANCE ( EUROPA - ASIA - AFRICA )"
+},
+{
+"mes": "2026-08",
+"campana": "Europa y El Mundo - Basic Economy - Hasta 74 años",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde",
+"servicio": "Asistencia Médica por enfermedad",
+"prestadorNombre": "LATINOAMERICANA DE ASISTENCIAS ( LAAS MEDICAL CARE )"
+},
+{
+"mes": "2026-08",
+"campana": "EUROPA Y EL MUNDO",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde",
+"servicio": "Asistencia Médica por enfermedad",
+"prestadorNombre": "ASISTENCIA TECNICA -  ASESORAMIENTO- VARIOS"
+},
+{
+"mes": "2026-08",
+"campana": "CARDINAL MULTIVIAJES 150 - 30 DIAS",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde",
+"servicio": "Asistencia Médica por enfermedad",
+"prestadorNombre": "SALUDONNET ESPAÑA"
+},
+{
+"mes": "2026-08",
+"campana": "EUROPA Y EL MUNDO",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde",
+"servicio": "Odontología",
+"prestadorNombre": "ATENCION POR REINTEGRO"
+},
+{
+"mes": "2026-08",
+"campana": "INTERNACIONAL 30",
+"atencion": null,
+"prestador": null,
+"recomienda": null,
+"respondio": "No Responde",
+"servicio": "TELEMEDICINA",
+"prestadorNombre": "ASISTEMED SL ( VISITAS MADRID )"
+},
+{
+"mes": "2026-08",
+"campana": "CARDINAL 100",
+"atencion": 5,
+"prestador": 5,
+"recomienda": "Recomienda",
+"respondio": "Responde",
+"servicio": "Asistencia Médica por enfermedad",
+"prestadorNombre": "ATENCION POR REINTEGRO"
+},
+{
+"mes": "2026-08",
+"campana": "Europa y El Mundo - Basic Economy - Hasta 74 años",
+"atencion": 5,
+"prestador": 5,
+"recomienda": "Recomienda",
+"respondio": "Responde",
+"servicio": "Asistencia Médica por preexistencias",
+"prestadorNombre": null
 }
 ]
 }

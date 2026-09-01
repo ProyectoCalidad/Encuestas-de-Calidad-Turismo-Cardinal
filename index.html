@@ -191,6 +191,9 @@ footer{text-align:center; color:var(--texto-sec); font-size:.75rem; padding:26px
 
     <div class="tarjeta"><h3>Nivel de Respuesta</h3><div class="chart-box"><canvas id="c-respuesta"></canvas></div></div>
     <div class="tarjeta"><h3>Ranking por Campaña</h3><div class="chart-box alto"><canvas id="c-campana"></canvas></div></div>
+
+    <div class="tarjeta full"><h3>Ranking por Servicio Prestado</h3><div class="chart-box alto"><canvas id="c-servicio"></canvas></div></div>
+    <div class="tarjeta full"><h3>Ranking por Prestador</h3><div class="chart-box alto"><canvas id="c-prestador-nombre"></canvas></div></div>
   </div>
 
   <footer>Panel de Turismo · Cardinal Assistance · datos actualizados manualmente mes a mes</footer>
@@ -219,10 +222,10 @@ btnTema.addEventListener('click', () => {
 /* ---------- estado ---------- */
 let CASOS = [];
 let MESES = [];
-const filtros = { mes: [], campana: [] };
+const filtros = { mes: [], campana: [], servicio: [], prestadorNombre: [] };
 const graficos = {};
 
-const ETIQUETA = { mes:'Mes', campana:'Campaña' };
+const ETIQUETA = { mes:'Mes', campana:'Campaña', servicio:'Servicio prestado', prestadorNombre:'Prestador' };
 
 function nombreMes(ym){
   if(!ym) return '';
@@ -261,6 +264,8 @@ function construirFiltros(){
   const camposFiltro = [
     {clave:'mes', valores: MESES.slice().sort().reverse(), etiquetaFn: nombreMes},
     {clave:'campana', valores: valoresUnicos('campana')},
+    {clave:'servicio', valores: valoresUnicos('servicio')},
+    {clave:'prestadorNombre', valores: valoresUnicos('prestadorNombre')},
   ];
 
   camposFiltro.forEach(({clave, valores, etiquetaFn}) => {
@@ -337,6 +342,8 @@ function casosFiltrados(ignorarMes = false){
   return CASOS.filter(c => {
     if(!ignorarMes && filtros.mes.length && !filtros.mes.includes(c.mes)) return false;
     if(filtros.campana.length && !filtros.campana.includes(c.campana)) return false;
+    if(filtros.servicio.length && !filtros.servicio.includes(c.servicio)) return false;
+    if(filtros.prestadorNombre.length && !filtros.prestadorNombre.includes(c.prestadorNombre)) return false;
     return true;
   });
 }
@@ -375,6 +382,8 @@ function renderTodo(){
   renderNpsEvolucion();
   renderRespuesta(filtrados);
   renderRanking('c-campana', filtrados, 'campana', 10);
+  renderRanking('c-servicio', filtrados, 'servicio', 12);
+  renderRanking('c-prestador-nombre', filtrados, 'prestadorNombre', 12);
 }
 
 function renderResumen(filtrados){

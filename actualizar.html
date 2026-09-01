@@ -96,9 +96,25 @@ function limpio(v) {
   return s === '' ? null : s;
 }
 
+const NA_TEXTO = new Set(['#N/A', '#N/D', 'N/A', '0']);
+function limpioCategoria(v) {
+  const s = limpio(v);
+  if (s === null || NA_TEXTO.has(s.toUpperCase())) return null;
+  return s;
+}
+
 function buscarColumna(fila, palabraClave) {
   const key = Object.keys(fila).find(k => k.includes(palabraClave));
   return key ? fila[key] : null;
+}
+
+// "Mes" y "Campaña" a veces llegan con el encabezado roto (la celda trae un
+// valor de dato en vez del nombre de columna). Si no está el nombre esperado,
+// usamos la posición fija de esa columna en la planilla.
+function valorPorNombreOPosicion(fila, nombre, posicion) {
+  if (fila[nombre] !== undefined) return fila[nombre];
+  const claves = Object.keys(fila);
+  return claves[posicion] !== undefined ? fila[claves[posicion]] : null;
 }
 
 function procesar(archivo) {
@@ -112,16 +128,19 @@ function procesar(archivo) {
       const filas = XLSX.utils.sheet_to_json(hoja, { defval: null, raw: true });
 
       const casos = filas.map(f => {
-        const mesRaw = f['Mes'] ?? f['Mes '];
+        const mesRaw = valorPorNombreOPosicion(f, 'Mes', 0);
+        const campanaRaw = valorPorNombreOPosicion(f, 'Campaña', 3);
         const respondioRaw = limpio(f['RESPONDIO?']);
         const recomiendaRaw = limpio(f['Recomienda Ok']);
         return {
           mes: mesRaw instanceof Date ? `${mesRaw.getFullYear()}-${String(mesRaw.getMonth()+1).padStart(2,'0')}` : aMes(mesRaw),
-          campana: limpio(f['Campaña']),
+          campana: limpio(campanaRaw),
           atencion: aPuntaje(buscarColumna(f, 'calificaras_la_atencin')),
           prestador: aPuntaje(buscarColumna(f, 'evaluaras_la_calidad_del_servicio')),
           recomienda: recomiendaRaw ? (RECOMIENDA_MAP[recomiendaRaw] || recomiendaRaw) : null,
           respondio: respondioRaw ? (RESPONDIO_MAP[respondioRaw] || respondioRaw) : null,
+          servicio: limpioCategoria(f['Servicio prestado']),
+          prestadorNombre: limpioCategoria(f['Prestador']),
         };
       }).filter(c => c.mes);
 
