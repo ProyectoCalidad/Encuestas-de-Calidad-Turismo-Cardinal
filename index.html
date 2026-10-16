@@ -206,6 +206,7 @@ footer{text-align:center; color:var(--texto-sec); font-size:.75rem; padding:26px
 <script>
 Chart.register(ChartDataLabels);
 Chart.defaults.font.family = "'Inter', sans-serif";
+Chart.defaults.plugins.tooltip.enabled = false; // sin información al pasar el cursor
 
 const PALETA = ['#005A96','#00AEEF','#F7941E','#ED145B','#00A99D','#845DC1','#FFC125','#6DCFF6'];
 
@@ -491,9 +492,9 @@ function renderNps(filtrados){
         legend:{position:'bottom', labels:{color:colorEjes()}},
         datalabels:{
           color:'#fff', font:{weight:'700', size:12},
-          formatter:(v)=> total ? Math.round(v/total*100)+'%' : '0%'
-        },
-        tooltip:{callbacks:{label:(ctx)=> `${ctx.label}: ${ctx.raw} (${Math.round(ctx.raw/total*100)}%)`}}
+          display:(ctx)=> Math.round(ctx.dataset.data[ctx.dataIndex]/total*100) > 0,
+          formatter:(v)=> Math.round(v/total*100)+'%'
+        }
       }
     }
   });
@@ -549,7 +550,7 @@ function renderRespuesta(filtrados){
       responsive:true, maintainAspectRatio:false,
       plugins:{
         legend:{position:'bottom', labels:{color:colorEjes()}},
-        datalabels:{color:'#fff', font:{weight:'700'}, formatter:(v)=>Math.round(v/total*100)+'%'}
+        datalabels:{color:'#fff', font:{weight:'700'}, display:(ctx)=> Math.round(ctx.dataset.data[ctx.dataIndex]/total*100) > 0, formatter:(v)=>Math.round(v/total*100)+'%'}
       }
     }
   });
@@ -575,7 +576,7 @@ function renderRanking(id, filtrados, campo, n){
       layout:{padding:{right:38}},
       plugins:{
         legend:{display:false},
-        datalabels:{anchor:'end', align:'end', clamp:true, clip:false, color: esOscuro()?'#edeff2':'#1c1e21', font:{weight:'700', size:11}, formatter:v=>v+'%'}
+        datalabels:{display:(ctx)=> ctx.dataset.data[ctx.dataIndex] > 0, anchor:'end', align:'end', clamp:true, clip:false, color: esOscuro()?'#edeff2':'#1c1e21', font:{weight:'700', size:11}, formatter:v=>v+'%'}
       },
       scales:{
         x:{beginAtZero:true, max:100, ticks:{color:colorEjes(), callback:v=>v+'%'}, grid:{color:colorGrilla()}},
