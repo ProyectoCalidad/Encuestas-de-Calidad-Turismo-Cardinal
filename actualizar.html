@@ -97,10 +97,19 @@ function limpio(v) {
 }
 
 const NA_TEXTO = new Set(['#N/A', '#N/D', 'N/A', '0']);
+
+// Equivalencias para unificar nombres distintos de un mismo servicio.
+// Formato: 'TEXTO EN MAYÚSCULAS TAL CUAL VIENE EN EL EXCEL': 'Nombre unificado'
+const EQUIVALENCIAS = {
+  'GASTOS POR VUELO DEMORADO O CANCELADO': 'Reembolso de gastos por vuelo demorado y/o cancelado',
+};
+
 function limpioCategoria(v) {
-  const s = limpio(v);
-  if (s === null || NA_TEXTO.has(s.toUpperCase())) return null;
-  return s;
+  let s = limpio(v);
+  if (s === null) return null;
+  s = s.replace(/\s+/g, ' ').trim();           // espacios dobles / finales
+  if (s === '' || NA_TEXTO.has(s.toUpperCase())) return null;
+  return EQUIVALENCIAS[s.toUpperCase()] || s;
 }
 
 function buscarColumna(fila, palabraClave) {
@@ -141,6 +150,9 @@ function procesar(archivo) {
           respondio: respondioRaw ? (RESPONDIO_MAP[respondioRaw] || respondioRaw) : null,
           servicio: limpioCategoria(f['Servicio prestado']),
           prestadorNombre: limpioCategoria(f['Prestador']),
+          origen: limpioCategoria(f['Provincia/Localidad']),
+          localidadServicio: limpioCategoria(f['Localidad del Servicio']),
+          agencia: limpioCategoria(f['Agencia']),
         };
       }).filter(c => c.mes);
 

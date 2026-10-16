@@ -149,6 +149,7 @@ header{
   padding:16px 18px 12px; box-shadow:var(--sombra);
 }
 .tarjeta h3{margin:0 0 10px; font-size:.95rem; font-weight:700;}
+.tarjeta h3 .base{font-weight:400; font-size:.75rem; color:var(--texto-sec); margin-left:6px;}
 .tarjeta .chart-box{position:relative; height:280px;}
 .tarjeta .chart-box.alto{height:340px;}
 
@@ -192,8 +193,11 @@ footer{text-align:center; color:var(--texto-sec); font-size:.75rem; padding:26px
     <div class="tarjeta"><h3>Nivel de Respuesta</h3><div class="chart-box"><canvas id="c-respuesta"></canvas></div></div>
     <div class="tarjeta"><h3>Ranking por Campaña</h3><div class="chart-box alto"><canvas id="c-campana"></canvas></div></div>
 
-    <div class="tarjeta full"><h3>Ranking por Servicio Prestado</h3><div class="chart-box alto"><canvas id="c-servicio"></canvas></div></div>
-    <div class="tarjeta full"><h3>Ranking por Prestador</h3><div class="chart-box alto"><canvas id="c-prestador-nombre"></canvas></div></div>
+    <div class="tarjeta full"><h3>Ranking por Servicio Prestado<span class="base" id="b-servicio"></span></h3><div class="chart-box alto"><canvas id="c-servicio"></canvas></div></div>
+    <div class="tarjeta full"><h3>Ranking por Prestador<span class="base" id="b-prestador-nombre"></span></h3><div class="chart-box alto"><canvas id="c-prestador-nombre"></canvas></div></div>
+    <div class="tarjeta full"><h3>Ranking por Provincia/Localidad de origen<span class="base" id="b-origen"></span></h3><div class="chart-box alto"><canvas id="c-origen"></canvas></div></div>
+    <div class="tarjeta full"><h3>Ranking por Localidad del Servicio<span class="base" id="b-localidad-servicio"></span></h3><div class="chart-box alto"><canvas id="c-localidad-servicio"></canvas></div></div>
+    <div class="tarjeta full"><h3>Ranking por Agencia<span class="base" id="b-agencia"></span></h3><div class="chart-box alto"><canvas id="c-agencia"></canvas></div></div>
   </div>
 
   <footer>Panel de Turismo · Cardinal Assistance · datos actualizados manualmente mes a mes</footer>
@@ -382,8 +386,20 @@ function renderTodo(){
   renderNpsEvolucion();
   renderRespuesta(filtrados);
   renderRanking('c-campana', filtrados, 'campana', 10);
-  renderRanking('c-servicio', filtrados, 'servicio', 12);
-  renderRanking('c-prestador-nombre', filtrados, 'prestadorNombre', 12);
+
+  // Estos rankings se calculan solo sobre encuestas respondidas (Responde + Parcial)
+  const respondidas = filtrados.filter(c => c.respondio === 'Responde' || c.respondio === 'Parcial');
+  [
+    ['servicio', 'c-servicio', 'b-servicio'],
+    ['prestadorNombre', 'c-prestador-nombre', 'b-prestador-nombre'],
+    ['origen', 'c-origen', 'b-origen'],
+    ['localidadServicio', 'c-localidad-servicio', 'b-localidad-servicio'],
+    ['agencia', 'c-agencia', 'b-agencia'],
+  ].forEach(([campo, canvasId, baseId]) => {
+    renderRanking(canvasId, respondidas, campo, 10);
+    const n = respondidas.filter(c => c[campo]).length;
+    document.getElementById(baseId).textContent = `· base: ${n} encuesta${n === 1 ? '' : 's'} respondida${n === 1 ? '' : 's'}`;
+  });
 }
 
 function renderResumen(filtrados){
